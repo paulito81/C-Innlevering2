@@ -3,15 +3,13 @@
 #include "secretCoder.h"
 #include "fileList.h"
 
-int readFromFile(char path [], long unsigned char *fileSize, File* f, char filename[] );
+int readFromFile(const char *fileName, const char *mode);
 
-char *encode(const char *inputMessageFile, const char *keyFile, int *status);
-int encode2(const char *inputMessageFile, const char *keyFile, char *encodedStream);
-char *decode(const char *inputCodeFile, const char *keyFile, int status);
-int decode2(const char *inputCodeFile, const char *keyFile, char *decodedMessage);
 
 int main(){
 
+		const char *fileName= "/home/ubuntu/Documents/Innlevering2/C-Innlevering2/songLibrary/allThatSheWants.txt";
+		readFromFile(fileName, "rw");
 	/*
 		TODO Encoding and Decoding reverse process 
 		-> convert code symbols back into understable form.
@@ -37,37 +35,33 @@ int main(){
 	
 		
 }
-int readFromFile(char path [], long unsigned char *fileSize, File* f, char filename[] ){
-
-	if(filename == null){
-		printf("Error unable to open file..\n" );
-	    return 1;
-	}
-		FILE* f = fopen(filename, "r");
-
-	    int scanNumber = 0;
-	    fscanf ( f, "%d", &scanNumber);
-	    int index = 0;
-
-	    while (!feof (f)){
-	            
-	        fscanf (f, "%d", &scanNumber);
-	            
-	        numbersOfFile[index] = scanNumber;
-	        totalSum += scanNumber;
-	        index++;
-
-	    }
+int readFromFile(const char *fileName, const char *mode) {
+		//const char a[1000];
+		FILE *fp;
+	    char numbersOfFile[10000];
+		
+		int scanNumber =0;
+		int index =0;
+		fp = fopen(fileName, mode);
 	        
-	    fclose (f);
+	   
+	     while (!feof (fp)){
+            
+            fscanf (fp, "%d", &scanNumber);
+            
+            numbersOfFile[index] += scanNumber;
+            index++;
+        }
+	    fclose (fp);
 	    return 0;
 }
+/*
 
 char *encode(const char *inputMessageFile, const char *keyFile, int *status){
 
 }
 
-int encode2(const char *inputMessageFile, const char *keyFile, char *encodedStream){
+int encode(const char *inputMessageFile, const char *keyFile, char *encodedStream){
 
 }
 
@@ -75,9 +69,9 @@ char *decode(const char *inputCodeFile, const char *keyFile, int status){
 
 }
 
-int decode2(const char *inputCodeFile, const char *keyFile, char *decodedMessage){
-	
-}
+int decode(const char *inputCodeFile, const char *keyFile, char *decodedMessage){
 
+}
+*/
 
 
