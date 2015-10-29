@@ -5,6 +5,10 @@
 
 int readFromFile(char path [], long unsigned char *fileSize, File* f, char filename[] );
 
+char *encode(const char *inputMessageFile, const char *keyFile, int *status);
+int encode2(const char *inputMessageFile, const char *keyFile, char *encodedStream);
+char *decode(const char *inputCodeFile, const char *keyFile, int status);
+int decode2(const char *inputCodeFile, const char *keyFile, char *decodedMessage);
 
 int main(){
 
@@ -36,7 +40,7 @@ int main(){
 int readFromFile(char path [], long unsigned char *fileSize, File* f, char filename[] ){
 
 	if(filename == null){
-		printf("Error file does not exist, and could not be open..\n" );
+		printf("Error unable to open file..\n" );
 	    return 1;
 	}
 		FILE* f = fopen(filename, "r");
@@ -52,10 +56,27 @@ int readFromFile(char path [], long unsigned char *fileSize, File* f, char filen
 	        numbersOfFile[index] = scanNumber;
 	        totalSum += scanNumber;
 	        index++;
+
 	    }
 	        
 	    fclose (f);
 	    return 0;
+}
+
+char *encode(const char *inputMessageFile, const char *keyFile, int *status){
+
+}
+
+int encode2(const char *inputMessageFile, const char *keyFile, char *encodedStream){
+
+}
+
+char *decode(const char *inputCodeFile, const char *keyFile, int status){
+
+}
+
+int decode2(const char *inputCodeFile, const char *keyFile, char *decodedMessage){
+	
 }
 
 
