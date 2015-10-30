@@ -1,15 +1,28 @@
 // Innlevering 2 by Paul Hasfjord
 #include <stdio.h>
+#include <string.h>
 #include "secretCoder.h"
 #include "fileList.h"
 
-int readFromFile(const char *fileName, const char *mode);
 
 
+
+int readFromFile(const char fileName[], const char *mode );
+// ENCODE AND DECODE
+char *encode(const char *inputMessageFile, const char *keyFile, int *status);
+int encode2(const char *inputMessageFile, const char *keyFile, char *encodedStream);
+char *decode(const char *inputCodeFile, const char *keyFile, int status);
+int decode2(const char *inputCodeFile, const char *keyFile, char *decodedMessage);
+/*
+void mallocBuffer(char *ptr);
+void free(void *pointer);
+*/
 int main(){
 
-		const char *fileName= "/home/ubuntu/Documents/Innlevering2/C-Innlevering2/songLibrary/allThatSheWants.txt";
-		readFromFile(fileName, "rw");
+		char fileName[1000] = "";
+		strcat(fileName, FILENAME4);
+		readFromFile(fileName, "r");
+		
 	/*
 		TODO Encoding and Decoding reverse process 
 		-> convert code symbols back into understable form.
@@ -35,43 +48,58 @@ int main(){
 	
 		
 }
-int readFromFile(const char *fileName, const char *mode) {
-		//const char a[1000];
+int readFromFile(const char fileName[], const char *mode) {
 		FILE *fp;
-	    char numbersOfFile[10000];
-		
-		int scanNumber =0;
-		int index =0;
+		int c ;
+
 		fp = fopen(fileName, mode);
-	        
-	   
-	     while (!feof (fp)){
-            
-            fscanf (fp, "%d", &scanNumber);
-            
-            numbersOfFile[index] += scanNumber;
-            index++;
-        }
-	    fclose (fp);
-	    return 0;
+		if( fp == NULL){
+			perror("Error in opening file");
+			return(-1);
+		}
+		printf("\n");
+
+		while(1){
+			//keyFile = fgetc(fp);
+
+			c = fgetc(fp);
+			if( feof(fp) ){
+				break;
+			}
+				printf("%c", c);
+				// printf("[%3i] ", c);
+		
+			// printf("[%3c] ", c);
+		}
+		
+		//printf("%d\n", keyFile);
+
+		printf("\n");
+		//printf("%d\n", sizeOf(keyFile));
+
+	  /*
+		char mystring [10000];
+	
+	   	fp = fopen(fileName, mode);
+		if (fp == NULL) perror ("Error opening file");
+		else {
+		if ( fgets (mystring , 10000 , fp) != NULL )
+		puts (mystring);
+	}	
+	*/
+		fclose(fp);
+	
+	return 0;
+
 }
 /*
-
-char *encode(const char *inputMessageFile, const char *keyFile, int *status){
-
+void mallocBuffer(char *ptr){
+	(int)ptr = malloc(10* sizeOf(*ptr));	
 }
-
-int encode(const char *inputMessageFile, const char *keyFile, char *encodedStream){
-
-}
-
-char *decode(const char *inputCodeFile, const char *keyFile, int status){
-
-}
-
-int decode(const char *inputCodeFile, const char *keyFile, char *decodedMessage){
-
+void free(void *pointer){
+	pointer.free();
 }
 */
+
 
 
